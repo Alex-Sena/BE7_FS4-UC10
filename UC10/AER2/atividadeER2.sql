@@ -1,0 +1,37 @@
+CREATE DATABASE UC10;
+
+USE UC10;
+
+CREATE TABLE Usuarios
+(
+	UsuarioId INT PRIMARY KEY IDENTITY,
+	Usuario VARCHAR(150) UNIQUE NOT NULL,
+	Senha VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE Classes
+(
+	ClassesId INT PRIMARY KEY IDENTITY,
+	NomeClasse VARCHAR(150) UNIQUE NOT NULL,
+	DescricaoClasse VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE Habilidades
+(
+	HabilidadeId INT PRIMARY KEY IDENTITY,
+	Nome VARCHAR(150) UNIQUE NOT NULL,
+);
+
+CREATE TABLE Personagens
+(
+	PersonagemId INT PRIMARY KEY IDENTITY,
+	NomePersonagem VARCHAR(150) UNIQUE NOT NULL,
+	UsuarioId INT FOREIGN KEY REFERENCES Usuarios(UsuarioId),
+	ClassesId INT FOREIGN KEY REFERENCES Classes(ClassesId)
+);
+
+CREATE TABLE ClassesHabilidades
+(
+	ClassesId INT FOREIGN KEY REFERENCES Classes(ClassesId),
+	HabilidadeId INT FOREIGN KEY REFERENCES Habilidades(HabilidadeId)
+);
